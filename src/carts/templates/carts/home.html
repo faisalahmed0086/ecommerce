@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 <h1>Cart</h1>
 
@@ -7,20 +8,19 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Product Price</th>
+      <th>#</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
     </tr>
   </thead>
   <tbody>
-  	{% for product in cart.products.all %}
+    {% for product in cart.products.all %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
-      <td><a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-
-      	{% include 'products/snippets/update-cart.html' with product=product cart=cart in_cart=True %}
+      <td><a href='{{ product.get_absolute_url }}'>{{ product.title }}</a> 
 
 
+        {% include 'products/snippets/update-cart.html' with product=product cart=cart in_cart=True %}
       </td>
       <td>{{ product.price }}</td>
     </tr>
@@ -33,9 +33,17 @@
       <td colspan="2"></td>
       <td><b>Total</b> {{ cart.total }}</td>
     </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td><a class='btn btn-lg btn-success' href='{% url "cart:checkout" %}'>Checkout</a></td>
+    </tr>
+
   </tbody>
 </table>
+
 {% else %}
-<p class="lead">Cart is empty</p>
+<p class='lead'>Cart is empty</p>
 {% endif %}
+
+
 {% endblock %}
