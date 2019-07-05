@@ -16,22 +16,6 @@ ORDER_STATUS_CHOICES = (
 class OrderManager(models.Manager):
     def new_or_get(self, billing_profile, cart_obj):
         created = False
-        qs = self.get_queryset.filter(
-            billing_profile=billing_profile, 
-            cart=cart_obj, 
-            active=True)
-        if qs.count() == 1:
-            obj = qs.first()
-        else:
-            obj = self.models.objects.create(
-                billing_profile=billing_profile, 
-                cart=cart_obj)
-            created = True
-        return obj, created
-
-class OrderManager(models.Manager):
-    def new_or_get(self, billing_profile, cart_obj):
-        created = False
         qs = self.get_queryset().filter(
                 billing_profile=billing_profile, 
                 cart=cart_obj, 
@@ -62,8 +46,6 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_id
-
-    objects = OrderManager()
 
     objects = OrderManager()
 
