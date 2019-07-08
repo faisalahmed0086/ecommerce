@@ -1,18 +1,12 @@
 eCommerce
 eCommerce Logo
 
-This course will teach you step-by-step to build a eCommerce site from scratch. We'll be using open-source software to create each aspect of a fully functioning eCommerce business.
-
-Full Course is here: https://www.joincfe.com/courses/ecommerce/
-
-Below you'll find the related lecture code to any given section and lesson. Enjoy!
-
 Code
 Section - Hello World
 Intial Commit
 
 Section - Products Component
-1 - Your first app Module
+1 - first app Module
 
 2 - Understanding CRUD
 
