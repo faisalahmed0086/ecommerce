@@ -13,18 +13,17 @@ from orders.models import Order
 from products.models import Product
 from .models import Cart
 
+
 def cart_detail_api_view(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     products = [{
             "id": x.id,
             "url": x.get_absolute_url(),
-            "name": x.name,
+            "name": x.name, 
             "price": x.price
             } 
-
-
             for x in cart_obj.products.all()]
-    cart_data = {"products": products, "subtotal": cart_obj.subtotal, "total": cart_obj.total}
+    cart_data  = {"products": products, "subtotal": cart_obj.subtotal, "total": cart_obj.total}
     return JsonResponse(cart_data)
 
 def cart_home(request):
@@ -34,6 +33,7 @@ def cart_home(request):
 
 def cart_update(request):
     product_id = request.POST.get('product_id')
+    
     if product_id is not None:
         try:
             product_obj = Product.objects.get(id=product_id)
@@ -49,14 +49,15 @@ def cart_update(request):
             added = True
         request.session['cart_items'] = cart_obj.products.count()
         # return redirect(product_obj.get_absolute_url())
-        if request.is_ajax():
+        if request.is_ajax(): # Asynchronous JavaScript And XML / JSON
             print("Ajax request")
             json_data = {
                 "added": added,
                 "removed": not added,
-                "cartItemCount": cart_obj.products.count(),
+                "cartItemCount": cart_obj.products.count()
             }
-            return JsonResponse(json_data)
+            return JsonResponse(json_data, status=200) # HttpResponse
+            # return JsonResponse({"message": "Error 400"}, status=400) # Django Rest Framework
     return redirect("cart:home")
 
 
